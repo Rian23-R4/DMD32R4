@@ -114,7 +114,7 @@ class DMD
 {
 public:
   // Instantiate the DMD
-  DMD(byte panelsWide, byte panelsHigh, byte PIN_nOE = 25, byte PIN_A = 5, byte PIN_B = 18, byte PIN_CLK = 22, byte PIN_SCLK = 26, byte PIN_R_DATA = 02);
+  DMD(byte PIN_nOE = 25, byte PIN_A = 5, byte PIN_B = 18, byte PIN_CLK = 22, byte PIN_SCLK = 26, byte PIN_R_DATA = 02);
   // virtual ~DMD();
 
   // Set or clear a pixel at the x and y location (0,0 is the top left corner)
@@ -166,6 +166,8 @@ public:
   void scanDisplayBySPI(byte PIN_nOE = 25, byte PIN_A = 5, byte PIN_B = 18, byte PIN_CLK = 22, byte PIN_SCLK = 26, byte PIN_R_DATA = 02, bool stageSPI = true);
 
   void setBrightness(uint16_t crh);
+
+  void changeDMD(byte panelsWide, byte panelsHigh);
 
 private:
   void drawCircleSub(int cx, int cy, int x, int y, byte bGraphicsMode);

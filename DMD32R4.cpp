@@ -7,17 +7,17 @@
  Note this currently uses the SPI port for the fastest performance to the DMD, be
  careful of possible conflicts with other SPI port devices
 --------------------------------------------------------------------------------------*/
-DMD::DMD(byte panelsWide, byte panelsHigh, byte PIN_DMD_nOE, byte PIN_DMD_A, byte PIN_DMD_B, byte PIN_DMD_CLK, byte PIN_DMD_SCLK, byte PIN_DMD_R_DATA)
+DMD::DMD(byte PIN_DMD_nOE, byte PIN_DMD_A, byte PIN_DMD_B, byte PIN_DMD_CLK, byte PIN_DMD_SCLK, byte PIN_DMD_R_DATA)
 {
 
-    uint16_t ui;
-    DisplaysWide = panelsWide;
-    DisplaysHigh = panelsHigh;
-    DisplaysTotal = DisplaysWide * DisplaysHigh;
-    row1 = DisplaysTotal << 4;
-    row2 = DisplaysTotal << 5;
-    row3 = ((DisplaysTotal << 2) * 3) << 2;
-    bDMDScreenRAM = (byte *)malloc(DisplaysTotal * DMD_RAM_SIZE_BYTES);
+    // uint16_t ui;
+    // DisplaysWide = panelsWide;
+    // DisplaysHigh = panelsHigh;
+    // DisplaysTotal = DisplaysWide * DisplaysHigh;
+    // row1 = DisplaysTotal << 4;
+    // row2 = DisplaysTotal << 5;
+    // row3 = ((DisplaysTotal << 2) * 3) << 2;
+    // bDMDScreenRAM = (byte *)malloc(DisplaysTotal * DMD_RAM_SIZE_BYTES);
 
     // initialise instance of the SPIClass attached to vspi
     vspi = new SPIClass(VSPI);
@@ -55,6 +55,19 @@ DMD::DMD(byte panelsWide, byte panelsHigh, byte PIN_DMD_nOE, byte PIN_DMD_A, byt
 //    // nothing needed here
 // }
 
+/*--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------*/
+void DMD::changeDMD(byte panelsWide, byte panelsHigh)
+{
+    DisplaysWide = panelsWide;
+    DisplaysHigh = panelsHigh;
+    DisplaysTotal = DisplaysWide * DisplaysHigh;
+    row1 = DisplaysTotal << 4;
+    row2 = DisplaysTotal << 5;
+    row3 = ((DisplaysTotal << 2) * 3) << 2;
+    bDMDScreenRAM = (byte *)malloc(DisplaysTotal * DMD_RAM_SIZE_BYTES);
+}
 /*--------------------------------------------------------------------------------------
  Set or clear a pixel at the x and y location (0,0 is the top left corner)
 --------------------------------------------------------------------------------------*/
